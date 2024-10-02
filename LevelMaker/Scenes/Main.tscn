@@ -1,5 +1,33 @@
-[gd_scene format=3 uid="uid://cqqm3g7d4b4vn"]
+[gd_scene load_steps=7 format=3 uid="uid://cqqm3g7d4b4vn"]
+
+[ext_resource type="Texture2D" uid="uid://cgyv3wlvus4ba" path="res://Textures/icon.svg" id="1_1vg1m"]
+[ext_resource type="Script" path="res://Scripts/OutputManager.gd" id="1_a633m"]
+[ext_resource type="Shader" uid="uid://bpe33f3a03lph" path="res://Shaders/SDF.tres" id="2_ay1pw"]
+[ext_resource type="Texture2D" uid="uid://bc8kp7caa8flq" path="res://Textures/Square.png" id="2_phrxs"]
+[ext_resource type="Script" path="res://Scripts/ShapeGraph.gd" id="4_m34o1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lddja"]
+shader = ExtResource("2_ay1pw")
+shader_parameter/MousePos = null
+shader_parameter/TextureSize = Vector2(500, 500)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="OutputManager" type="Node" parent="."]
+script = ExtResource("1_a633m")
+viewport_path = NodePath("../Camera2D")
+
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Layers" type="Node2D" parent="."]
+
+[node name="Icon" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-212, 82)
+texture = ExtResource("1_1vg1m")
+
+[node name="Square" type="Sprite2D" parent="." node_paths=PackedStringArray("textOBJ")]
+material = SubResource("ShaderMaterial_lddja")
+texture = ExtResource("2_phrxs")
+script = ExtResource("4_m34o1")
+textOBJ = NodePath(".")
